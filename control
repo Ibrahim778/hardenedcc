@@ -2,8 +2,8 @@ Package: com.mibrahim.hardenedcc
 Name: HardenedCC
 Version: 0.0.1
 Architecture: iphoneos-arm
-Description: An awesome Orion tweak!
-Maintainer: Ibrahim
-Author: Ibrahim
+Description: A tweak to disable connectivity toggles in the control centre while the device is locked
+Maintainer: M Ibrahim
+Author: M Ibrahim
 Section: Tweaks
 Depends: ${ORION}, firmware (>= 14.0), com.ginsu.comet
