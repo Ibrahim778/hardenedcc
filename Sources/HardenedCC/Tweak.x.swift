@@ -15,54 +15,43 @@ class CCRoundButtonHook : ClassHook<CCUIRoundButton> {
         let lockState : UInt64 = aggInstance.lockState()
         
         if lockState != 0 && lockState != 1 { // locked
-            guard let superView = target.superview, let controller = viewController(for: superView) else {
+            guard let superView = target.superview else {
                 return orig.isEnabled()
             }
-            
+    
             if let targetClass = NSClassFromString("CCUIConnectivityAirplaneViewController") {
-                if(controller.isKind(of: targetClass) && !settings.airplane){
+                if(superView.viewDelegate.isKind(of: targetClass) && !settings.airplane){
                     return false
                 }
             }
             if let targetClass = NSClassFromString("CCUIConnectivityCellularDataViewController") {
-                if(controller.isKind(of: targetClass) && !settings.cell) {
+                if(superView.viewDelegate.isKind(of: targetClass) && !settings.cell) {
                     return false
                 }
             }
             if let targetClass = NSClassFromString("CCUIConnectivityWifiViewController") {
-                if(controller.isKind(of: targetClass) && !settings.wifi) {
+                if(superView.viewDelegate.isKind(of: targetClass) && !settings.wifi) {
                     return false
                 }
             }
             if let targetClass = NSClassFromString("CCUIConnectivityBluetoothViewController") {
-                if(controller.isKind(of: targetClass) && !settings.bluetooth) {
+                if(superView.viewDelegate.isKind(of: targetClass) && !settings.bluetooth) {
                     return false
                 }
             }
             if let targetClass = NSClassFromString("CCUIConnectivityAirDropViewController") {
-                if(controller.isKind(of: targetClass) && !settings.airdrop) {
+                if(superView.viewDelegate.isKind(of: targetClass) && !settings.airdrop) {
                     return false
                 }
             }
             if let targetClass = NSClassFromString("CCUIConnectivityHotspotViewController") {
-                if(controller.isKind(of: targetClass) && !settings.hotspot) {
+                if(superView.viewDelegate.isKind(of: targetClass) && !settings.hotspot) {
                     return false
                 }
             }
         }
 
         return orig.isEnabled()
-    }
-    
-    private func viewController(for view: UIView) -> UIViewController? {
-        var responder: UIResponder? = view
-        while let nextResponder = responder?.next {
-            if let viewController = nextResponder as? UIViewController {
-                return viewController
-            }
-            responder = nextResponder
-        }
-        return nil
     }
 }
 
