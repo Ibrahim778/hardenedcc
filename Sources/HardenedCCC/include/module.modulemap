@@ -1,0 +1,4 @@
+module HardenedCCC {
+    umbrella "."
+    export *
+}
